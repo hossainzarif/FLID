@@ -44,7 +44,7 @@ python3 main.py --optimizer= sgd \
 This will execute the `main.py` file, which contains the main code for the project. 
 
 ## Results generated for 30% poison
-<img src="acc.png" width="48">
+<img src="acc.png" width="150">
 
 ![ACC](acc.png|width=100) ![loss](loss.png|width=100)
 
