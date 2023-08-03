@@ -45,10 +45,7 @@ This will execute the `main.py` file, which contains the main code for the proje
 
 ## Results generated for 30% poison
 
-![ACC](acc.png)
-
-
-![loss](loss.png)
+![ACC](acc.png =150x150) ![loss](loss.png =150x150)
 
 ```
 Note: Here Poison parameter refers to the poison level for the simulation. The parameter has to be in **percentage**
