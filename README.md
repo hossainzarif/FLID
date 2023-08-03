@@ -44,9 +44,9 @@ python3 main.py --optimizer= sgd \
 This will execute the `main.py` file, which contains the main code for the project. 
 
 ## Results generated for 30% poison
-<img src="acc.png" width="350">
+<img src="acc.png" width="350"> <img src="loss.png" width="350">
 
-![ACC](acc.png|width=100) ![loss](loss.png|width=100)
+
 
 ```
 Note: Here Poison parameter refers to the poison level for the simulation. The parameter has to be in **percentage**
