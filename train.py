@@ -182,7 +182,7 @@ def average_models(model, clients_models_hist:list , weights:list):
     return new_model
       
 
-def FedProx(model, training_sets:list, n_iter:int,  testing_sets:list, mu=0, 
+def FedProx(model,optimizer, training_sets:list, n_iter:int,  testing_sets:list, mu=0, 
     file_name="test", epochs=5, lr=10**-2):
     """ all the clients are considered in this implementation of FedProx
     Parameters:
@@ -228,10 +228,13 @@ def FedProx(model, training_sets:list, n_iter:int,  testing_sets:list, mu=0,
         clients_params=[]
         clients_models=[]
         clients_losses=[]
-        print(clients_losses)
         for k in range(K):
             local_model=deepcopy(model)
-            local_optimizer=optim.Adam(local_model.parameters(),lr=0.0005)
+            if(optimizer=='sgd'):
+                print("sgd")
+                local_optimizer=optim.Adam(local_model.parameters(),lr=lr)
+            else:
+                local_optimizer=optim.SGD(local_model.parameters(),lr=lr)   
             
             local_loss,grads=local_learning(local_model,mu,local_optimizer,
                 training_sets[k],epochs,loss_f,k)
@@ -296,8 +299,8 @@ def train (batch_size,poison,data_split,optimizer,comm_rounds,local_epochs,lr,nu
 
     model = Model().to(device)
     n_iter = comm_rounds
-    model_f, loss_hist_FA_iid, acc_hist_FA_iid,server_accuracy_list,server_loss_list,grads,gradients = FedProx( model, 
-    lisa_iid_train_dls, n_iter, lisa_iid_test_dls, epochs =local_epochs)
+    model_f, loss_hist_FA_iid, acc_hist_FA_iid,server_accuracy_list,server_loss_list,grads,gradients = FedProx( model,optimizer, 
+    lisa_iid_train_dls, n_iter, lisa_iid_test_dls, epochs =local_epochs,lr=lr)
 
 
     with open('acc-10-epoch-local-1.pickle', 'wb') as handle:
